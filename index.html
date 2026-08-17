@@ -3,36 +3,208 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#05070a" />
     <title>De Soundwave - Music Streaming</title>
-    <style>
-      html, body, #root { min-height: 100%; background: #05070a; color: #fff; }
-    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <meta name="description" content="De Soundwave - Discover and stream music from around the world." />
     <meta name="author" content="De Soundwave" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
 
     <meta property="og:title" content="De Soundwave" />
     <meta property="og:description" content="Discover and stream music from around the world." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/logo.png" />
+    <meta property="og:image" content="/favicon.svg" />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="De Soundwave" />
-    <meta name="twitter:image" content="/logo.png" />
+    <meta name="twitter:image" content="/favicon.svg" />
+
+    <style>
+      html,
+      body,
+      #root {
+        min-height: 100%;
+        margin: 0;
+        background: #05070a;
+        color: #fff;
+      }
+
+      #app-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        padding: 28px 20px;
+        gap: 26px;
+        background:
+          radial-gradient(70% 55% at 15% 0%, rgba(57, 255, 20, 0.14), transparent 60%),
+          radial-gradient(60% 50% at 95% 20%, rgba(124, 255, 107, 0.08), transparent 60%),
+          #05070a;
+        font-family: Inter, system-ui, -apple-system, sans-serif;
+        transition: opacity 0.45s ease;
+      }
+
+      #app-splash.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .splash-brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .splash-mark {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        object-fit: cover;
+        box-shadow: 0 0 0 1px rgba(57, 255, 20, 0.32), 0 0 26px rgba(57, 255, 20, 0.26);
+        animation: splash-pulse 2.2s ease-in-out infinite;
+      }
+
+      .splash-name {
+        margin: 0;
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        background: linear-gradient(100deg, #ffffff 20%, #7cff6b 50%, #ffffff 80%);
+        background-size: 220% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: splash-sheen 2.6s linear infinite;
+      }
+
+      .splash-tag {
+        margin: 4px 0 0;
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+      }
+
+      .splash-body {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        max-width: 1100px;
+        width: 100%;
+      }
+
+      .sk {
+        border-radius: 12px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.055) 25%,
+          rgba(255, 255, 255, 0.13) 37%,
+          rgba(255, 255, 255, 0.055) 63%
+        );
+        background-size: 400% 100%;
+        animation: splash-shimmer 1.5s ease-in-out infinite;
+      }
+
+      .sk-hero {
+        height: 132px;
+        border-radius: 18px;
+      }
+
+      .sk-title {
+        height: 16px;
+        width: 190px;
+        border-radius: 999px;
+      }
+
+      .splash-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .sk-card {
+        height: 96px;
+      }
+
+      .splash-rows {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .sk-row {
+        height: 54px;
+      }
+
+      @media (min-width: 720px) {
+        #app-splash {
+          padding: 36px 40px;
+        }
+        .splash-grid {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+        .sk-card {
+          height: 132px;
+        }
+      }
+
+      @keyframes splash-shimmer {
+        0% { background-position: 100% 50%; }
+        100% { background-position: 0 50%; }
+      }
+
+      @keyframes splash-sheen {
+        0% { background-position: 180% 50%; }
+        100% { background-position: -80% 50%; }
+      }
+
+      @keyframes splash-pulse {
+        0%, 100% { transform: scale(1); opacity: 0.92; }
+        50% { transform: scale(1.06); opacity: 1; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .sk,
+        .splash-mark,
+        .splash-name {
+          animation: none;
+        }
+      }
+    </style>
   </head>
 
   <body>
-    <div id="root">
-      <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;font-family:Inter,system-ui,sans-serif;padding:24px;text-align:center;">
-        <p style="font-size:22px;font-weight:800;margin:0;">De Soundwave</p>
-        <p style="margin:0;opacity:.8;">Loading… if this stays blank, open <b>http://127.0.0.1:8080/</b></p>
-        <p style="margin:0;font-size:13px;opacity:.65;">In Brave, click the lion icon and set Shields Down for this site.</p>
+    <div id="app-splash">
+      <div class="splash-brand">
+        <img class="splash-mark" src="/favicon.svg" alt="" />
+        <div>
+          <p class="splash-name">De Soundwave</p>
+          <p class="splash-tag">Music from every country</p>
+        </div>
+      </div>
+
+      <div class="splash-body">
+        <div class="sk sk-hero"></div>
+        <div class="sk sk-title"></div>
+        <div class="splash-grid">
+          <div class="sk sk-card"></div>
+          <div class="sk sk-card"></div>
+          <div class="sk sk-card"></div>
+          <div class="sk sk-card"></div>
+        </div>
+        <div class="splash-rows">
+          <div class="sk sk-row"></div>
+          <div class="sk sk-row"></div>
+          <div class="sk sk-row"></div>
+        </div>
       </div>
     </div>
+
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

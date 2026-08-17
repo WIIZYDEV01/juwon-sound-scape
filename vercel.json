@@ -2,5 +2,13 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/offline-audio", "destination": "/api/offline-audio" },
+    { "source": "/audius-api/:path*", "destination": "https://api.audius.co/:path*" },
+    { "source": "/deezer-api/:path*", "destination": "https://api.deezer.com/:path*" },
+    { "source": "/jamendo-api/:path*", "destination": "https://api.jamendo.com/:path*" },
+    { "source": "/lrclib/:path*", "destination": "https://lrclib.net/:path*" },
+    { "source": "/ia/:path*", "destination": "https://archive.org/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }

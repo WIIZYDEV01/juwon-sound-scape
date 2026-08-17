@@ -4,9 +4,17 @@ import "./index.css";
 
 const rootEl = document.getElementById("root");
 
+function hideSplash() {
+  const splash = document.getElementById("app-splash");
+  if (!splash) return;
+  splash.classList.add("is-hidden");
+  window.setTimeout(() => splash.remove(), 500);
+}
+
 function showBootError(message: string) {
   if (!rootEl) return;
-  rootEl.innerHTML = `<div style="padding:32px;color:#fff;font-family:Inter,system-ui,sans-serif;max-width:560px"><h1 style="margin:0 0 12px">De Soundwave</h1><p style="opacity:.85">${message}</p><p style="opacity:.7">Open <b>http://127.0.0.1:8080/</b> and refresh.</p></div>`;
+  hideSplash();
+  rootEl.innerHTML = `<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:32px;text-align:center;color:#fff;font-family:Inter,system-ui,sans-serif"><h1 style="margin:0;font-size:22px">De Soundwave</h1><p style="margin:0;opacity:.75;max-width:420px">${message}</p><button onclick="location.reload()" style="margin-top:8px;padding:10px 22px;border-radius:999px;border:0;background:#39ff14;color:#04140a;font-weight:700;cursor:pointer">Reload</button></div>`;
 }
 
 async function boot() {
@@ -17,8 +25,9 @@ async function boot() {
       <App />
     </StrictMode>
   );
+  requestAnimationFrame(hideSplash);
 }
 
-void boot().catch((err) => {
-  showBootError(err instanceof Error ? err.message : String(err));
+void boot().catch(() => {
+  showBootError("Something went wrong while starting the app. Please reload.");
 });

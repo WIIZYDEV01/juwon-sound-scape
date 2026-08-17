@@ -29,7 +29,7 @@ import CountryDetailPage from "@/pages/CountryDetailPage";
 import ArtistDiscoverPage from "@/pages/ArtistDiscoverPage";
 import NotFound from "@/pages/NotFound";
 import AmbientBackdrop from "@/components/AmbientBackdrop";
-import { Loader2 } from "lucide-react";
+import AppSkeleton from "@/components/AppSkeleton";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -45,13 +45,7 @@ const queryClient = new QueryClient({
 function ProtectedLayout() {
   const { loading } = useAuth();
 
-  if (loading) {
-    return (
-      <div className="app-shell flex h-screen items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
-      </div>
-    );
-  }
+  if (loading) return <AppSkeleton />;
 
   return (
     <PlayerProvider>
